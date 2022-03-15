@@ -1,7 +1,10 @@
 use crate::{
     gizmo_material::GizmoMaterial, PickableGizmo, TransformGizmoBundle, TransformGizmoInteraction,
 };
-use bevy::prelude::*;
+use bevy::{
+    prelude::*,
+    pbr::NotShadowCaster,
+};
 
 mod cone;
 mod truncated_torus;
@@ -61,7 +64,8 @@ pub fn build_gizmo(
                     Vec3::new(axis_length / 2.0, 0.0, 0.0),
                 )),
                 ..Default::default()
-            });
+            })
+            .insert(NotShadowCaster);
             parent.spawn_bundle(MaterialMeshBundle {
                 mesh: arrow_tail_mesh.clone(),
                 material: gizmo_matl_y.clone(),
@@ -70,7 +74,8 @@ pub fn build_gizmo(
                     Vec3::new(0.0, axis_length / 2.0, 0.0),
                 )),
                 ..Default::default()
-            });
+            })
+            .insert(NotShadowCaster);
             parent.spawn_bundle(MaterialMeshBundle {
                 mesh: arrow_tail_mesh,
                 material: gizmo_matl_z.clone(),
@@ -79,7 +84,8 @@ pub fn build_gizmo(
                     Vec3::new(0.0, 0.0, axis_length / 2.0),
                 )),
                 ..Default::default()
-            });
+            })
+            .insert(NotShadowCaster);
 
             // Translation Handles
             parent
@@ -96,7 +102,8 @@ pub fn build_gizmo(
                 .insert(TransformGizmoInteraction::TranslateAxis {
                     original: Vec3::X,
                     axis: Vec3::X,
-                });
+                })
+                .insert(NotShadowCaster);
             parent
                 .spawn_bundle(MaterialMeshBundle {
                     mesh: cone_mesh.clone(),
@@ -108,7 +115,8 @@ pub fn build_gizmo(
                 .insert(TransformGizmoInteraction::TranslateAxis {
                     original: Vec3::Y,
                     axis: Vec3::Y,
-                });
+                })
+                .insert(NotShadowCaster);
             parent
                 .spawn_bundle(MaterialMeshBundle {
                     mesh: cone_mesh.clone(),
@@ -123,7 +131,8 @@ pub fn build_gizmo(
                 .insert(TransformGizmoInteraction::TranslateAxis {
                     original: Vec3::Z,
                     axis: Vec3::Z,
-                });
+                })
+                .insert(NotShadowCaster);
             /*
                         // Origin
                         parent
@@ -144,12 +153,14 @@ pub fn build_gizmo(
                     f32::to_radians(90.0),
                 )),
                 ..Default::default()
-            });
+            })
+            .insert(NotShadowCaster);
             parent.spawn_bundle(MaterialMeshBundle {
                 mesh: rotation_mesh.clone(),
                 material: gizmo_matl_y.clone(),
                 ..Default::default()
-            });
+            })
+            .insert(NotShadowCaster);
             parent.spawn_bundle(MaterialMeshBundle {
                 mesh: rotation_mesh.clone(),
                 material: gizmo_matl_z.clone(),
@@ -158,7 +169,8 @@ pub fn build_gizmo(
                         * Quat::from_axis_angle(Vec3::X, f32::to_radians(90.0)),
                 ),
                 ..Default::default()
-            });
+            })
+            .insert(NotShadowCaster);
 
             // Rotation Handles
             parent
@@ -176,7 +188,8 @@ pub fn build_gizmo(
                 .insert(TransformGizmoInteraction::RotateAxis {
                     original: Vec3::X,
                     axis: Vec3::X,
-                });
+                })
+                .insert(NotShadowCaster);
             parent
                 .spawn_bundle(MaterialMeshBundle {
                     mesh: sphere_mesh.clone(),
@@ -192,7 +205,8 @@ pub fn build_gizmo(
                 .insert(TransformGizmoInteraction::RotateAxis {
                     original: Vec3::Y,
                     axis: Vec3::Y,
-                });
+                })
+                .insert(NotShadowCaster);
             parent
                 .spawn_bundle(MaterialMeshBundle {
                     mesh: sphere_mesh.clone(),
@@ -208,7 +222,8 @@ pub fn build_gizmo(
                 .insert(TransformGizmoInteraction::RotateAxis {
                     original: Vec3::Z,
                     axis: Vec3::Z,
-                });
+                })
+                .insert(NotShadowCaster);
             /*
                         // Scaling Handles
                         parent
